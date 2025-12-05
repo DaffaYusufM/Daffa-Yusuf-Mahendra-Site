@@ -2,27 +2,26 @@
 
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProjects } from "@/context/ProjectContext";
 
 export default function Projects() {
-    const { t, language } = useLanguage();
+    const { t } = useLanguage();
+    const { projects, isLoading } = useProjects();
 
-    const projects = [
-        {
-            image: "/images/img/coder-telyu.png",
-            title: "CODER TELYU SBY",
-            roleKey: "frontend",
-        },
-        {
-            image: "/images/img/recalm.jpg",
-            title: "Recalm Project",
-            roleKey: "fullstack",
-        },
-        {
-            image: "/images/img/JelajahWorld.png",
-            title: "Jelajah World",
-            roleKey: "frontend",
-        },
-    ];
+    if (isLoading) {
+        return (
+            <section className="section-project" id="project">
+                <div className="project-container">
+                    <h2>{t("projects.title")}</h2>
+                    <h4>{t("projects.subtitle")}</h4>
+                    <div className="project-loading">
+                        <div className="spinner"></div>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="section-project" id="project">
@@ -31,14 +30,17 @@ export default function Projects() {
                 <h4>{t("projects.subtitle")}</h4>
 
                 <div className="project-grid">
-                    {projects.map((project, index) => (
-                        <div className="project-card" key={index}>
+                    {projects.map((project) => (
+                        <div className="project-card" key={project.id}>
                             <Image
                                 src={project.image}
                                 alt={project.title}
                                 width={400}
                                 height={200}
                                 style={{ objectFit: "cover" }}
+                                onError={(e) => {
+                                    e.target.src = '/images/img/placeholder.png';
+                                }}
                             />
                             <div className="project-info">
                                 <h3>{project.title}</h3>
@@ -47,6 +49,12 @@ export default function Projects() {
                         </div>
                     ))}
                 </div>
+
+                {projects.length === 0 && (
+                    <div className="project-empty">
+                        <p>No projects yet</p>
+                    </div>
+                )}
             </div>
         </section>
     );
