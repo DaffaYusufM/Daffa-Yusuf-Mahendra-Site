@@ -1,29 +1,34 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Projects() {
+    const { t, language } = useLanguage();
+
     const projects = [
         {
             image: "/images/img/coder-telyu.png",
             title: "CODER TELYU SBY",
-            role: "Front-End Developer",
+            roleKey: "frontend",
         },
         {
             image: "/images/img/recalm.jpg",
             title: "Recalm Project",
-            role: "Full Stack Developer",
+            roleKey: "fullstack",
         },
         {
             image: "/images/img/JelajahWorld.png",
             title: "Jelajah World",
-            role: "Front-End Developer",
+            roleKey: "frontend",
         },
     ];
 
     return (
         <section className="section-project" id="project">
             <div className="project-container">
-                <h2>Projects</h2>
-                <h4>Recent Works</h4>
+                <h2>{t("projects.title")}</h2>
+                <h4>{t("projects.subtitle")}</h4>
 
                 <div className="project-grid">
                     {projects.map((project, index) => (
@@ -37,7 +42,7 @@ export default function Projects() {
                             />
                             <div className="project-info">
                                 <h3>{project.title}</h3>
-                                <p>{project.role}</p>
+                                <p>{t(`projects.roles.${project.roleKey}`)}</p>
                             </div>
                         </div>
                     ))}

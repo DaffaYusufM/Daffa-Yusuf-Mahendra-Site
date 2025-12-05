@@ -1,6 +1,6 @@
-import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={poppins.className} suppressHydrationWarning>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

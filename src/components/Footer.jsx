@@ -1,8 +1,14 @@
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
+
 export default function Footer() {
+    const { t } = useLanguage();
+
     return (
         <footer className="footer">
-            <p>© 2025 Daffa Yusuf Mahendra. All Rights Reserved.</p>
-            <p>Created for Fasilkom Project</p>
+            <p>{t("footer.copyright")}</p>
+            <p>{t("footer.createdFor")}</p>
         </footer>
     );
 }

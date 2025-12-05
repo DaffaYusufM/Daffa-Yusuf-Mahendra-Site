@@ -1,23 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Profile() {
+    const { t } = useLanguage();
+
     return (
         <section className="profile" id="profile">
             <div className="container-profile">
                 {/* Left: Text */}
                 <div className="profile-content">
-                    <h4>Hello, I&apos;m</h4>
-                    <h1>Daffa Yusuf Mahendra.</h1>
-                    <p>Undergraduate Information System at Telkom University Surabaya</p>
+                    <h4>{t("profile.greeting")}</h4>
+                    <h1>{t("profile.name")}</h1>
+                    <p>{t("profile.description")}</p>
 
                     {/* Buttons */}
                     <div className="profile-buttons">
                         <Link href="mailto:dayundraofficial@gmail.com" className="btn btn-contact">
-                            Contact Me
+                            {t("profile.contactMe")}
                         </Link>
                         <button className="btn btn-work">
-                            Download CV
+                            {t("profile.downloadCV")}
                             <Image src="/images/svg/TablerDownload.svg" alt="Download CV" width={18} height={18} />
                         </button>
                     </div>

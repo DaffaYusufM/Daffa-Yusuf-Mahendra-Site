@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
+    const { t } = useLanguage();
+
     const contactInfo = [
         {
             icon: "/images/svg/email-svgrepo-com.svg",
@@ -35,12 +40,8 @@ export default function Contact() {
                 {/* Left: Text and Contact Cards */}
                 <div className="contact-left">
                     <div className="contact-text">
-                        <h2>Let&apos;s Work Together</h2>
-                        <p>
-                            I&apos;m always excited to collaborate on creative projects, web
-                            development, or UI/UX design ideas. Feel free to reach out through
-                            the contacts below!
-                        </p>
+                        <h2>{t("contact.title")}</h2>
+                        <p>{t("contact.description")}</p>
                     </div>
 
                     <div className="contact-cards">
@@ -68,7 +69,7 @@ export default function Contact() {
                 {/* Right: Contact Form */}
                 <div className="contact-right">
                     <div className="contact-form">
-                        <h3>Send Me a Message</h3>
+                        <h3>{t("contact.formTitle")}</h3>
                         <form
                             action="https://formsubmit.co/dayundraofficial@gmail.com"
                             method="POST"
@@ -77,40 +78,40 @@ export default function Contact() {
                             <input type="hidden" name="_captcha" value="false" />
 
                             <div className="form-group">
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">{t("contact.nameLabel")}</label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
                                     required
-                                    placeholder="Your full name"
+                                    placeholder={t("contact.namePlaceholder")}
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">{t("contact.emailLabel")}</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     required
-                                    placeholder="your.email@example.com"
+                                    placeholder={t("contact.emailPlaceholder")}
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="message">Message</label>
+                                <label htmlFor="message">{t("contact.messageLabel")}</label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     required
-                                    placeholder="Tell me about your project or just say hello!"
+                                    placeholder={t("contact.messagePlaceholder")}
                                     rows="5"
                                 ></textarea>
                             </div>
 
                             <button type="submit" className="btn-submit">
-                                Send Message
+                                {t("contact.sendButton")}
                                 <svg
                                     width="20"
                                     height="20"
